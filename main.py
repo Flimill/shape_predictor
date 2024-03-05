@@ -30,12 +30,12 @@ while(test_accuracy < 0.95):
     #тренировка модели
     num_classes = 3  # всего классов
     epochs = random.randint(10, 40)  # Количество эпох
-    batch_size = random.randint(16, 64)  # Размер мини-выборки
+    batch_size = 64  # Размер мини-выборки
     learning_rate = random.choice([0.01,0.001,0.0001,0.00001])
     name = train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate)
     
     #тестирование модели
-    test_accuracy3 = test_model(name, class_names, test_ds_path)
+    test_accuracy3 = test_model(name, class_names, test_ds_path, img_width, img_height)
     print(num_samples_train)
     print(epochs)
     print(batch_size)

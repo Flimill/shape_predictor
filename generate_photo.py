@@ -6,8 +6,8 @@ from PIL import Image, ImageDraw
 
 # Функция для генерации случайного цвета
 def random_color():
-    #return (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-    return (255,255,255)
+    return (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+    #return (255,255,255)
 
 
     # Функция для создания изображения и сохранения его в указанную директорию
