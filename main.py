@@ -59,7 +59,8 @@ for activation in activation_array:
         #вывод информации о модели в консоль
         print(f'num_layers_array = {num_layers}')
         print(f'num_neurons = {num_neurons}')
-        print(f'test_accuracy3 = {test_accuracy3}')   
+        print(f'test_accuracy3 = {test_accuracy3}')
+        print(f'activation = {activation}')   
         print(num_samples_train)
         print(epochs)
         print(batch_size)
