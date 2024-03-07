@@ -12,10 +12,10 @@ def plot_graph_layers(num_layers_array, accuracy_array, activation):
     plt.show(block=False)
     plt.pause(5) 
 
-def plot_graph_neurons(accuracy_array, num_neurons, activation):    
+def plot_graph_neurons(accuracy_array, num_neurons_array, activation):    
     time.sleep(5)
     # точности от числа нейронов
-    plt.plot(num_neurons, accuracy_array, marker='o')
+    plt.plot(num_neurons_array, accuracy_array, marker='o')
     plt.title(f'Зависимость точности от числа нейронов, для предаточной функции {activation}')
     plt.xlabel('Число слоев')
     plt.ylabel('Точность (accuracy)')
