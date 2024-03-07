@@ -47,7 +47,7 @@ def train_model(train_path,models_path,num_classes,epochs,batch_size,img_height,
     )
     # Сохраняем модель
     if not exists(models_path): makedirs(models_path)
-    num_neurons = sum(layer.count_params() for layer in model.layers)
+    num_neurons = [layer.units for layer in model.layers if isinstance(layer, Dense)]
     name = f'{models_path}/shape_predictor{models_number}.h5'
     model.save(name)
     return name, num_neurons
