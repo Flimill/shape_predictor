@@ -9,7 +9,7 @@ h=64
 min_fig_size = 10
 class_names = ['boxes', 'circles', 'treangle'] 
 # Загружаем модель
-model = load_model('models/shape_predictor49.h5')
+model = load_model('final_models\99.47%/shape_predictor1.h5')
 # Генерируем случайные изображения и делаем предсказания
 num_random_images = 15  # количество случайных изображений для предсказания
 
@@ -44,7 +44,7 @@ for i in range(num_random_images):
     # Преобразуем изображение в массив numpy и нормализуем
     img_array = image.img_to_array(random_image)
     img_array = np.expand_dims(img_array, axis=0)
-    img_array /= 255.
+    #img_array /= 255.
 
     # Делаем предсказание
     prediction = model.predict(img_array)

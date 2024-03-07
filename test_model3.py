@@ -36,4 +36,4 @@ def test_model(name, class_names, test_path, img_width, img_height):
 
 
 # Пример вызова функции
-#test_model('final_models/88.67%/shape_predictor24.h5', ['boxes', 'circles', 'treangle'], 'testing_dataset',64,64)
+#test_model('models/shape_predictor5.h5', ['boxes', 'circles', 'treangle'], 'testing_dataset',64,64)

@@ -33,11 +33,11 @@ def train_model(train_path,models_path,num_classes,epochs,batch_size,img_height,
 
     # Добавляем сверточные слои
     model.add(Input(shape=input_shape))
-    model.add(Conv2D(1, (3, 3), activation='relu'))
+    model.add(Conv2D(32, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Conv2D(2, (3, 3), activation='relu'))
+    model.add(Conv2D(64, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
-    model.add(Conv2D(4, (3, 3), activation='relu'))
+    model.add(Conv2D(128, (3, 3), activation='relu'))
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     # Преобразуем данные в один вектор
