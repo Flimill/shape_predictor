@@ -1,28 +1,24 @@
 import time
 import matplotlib.pyplot as plt
 
-
-def plot_graph_layers(num_layers_array, accuracy_array, activation):
-    # Построение графика точности от числа слоев
-    plt.figure()  # Создаем новое окно для графика
-    plt.plot(num_layers_array, accuracy_array, marker='o')
-    plt.title(f'Зависимость точности от числа слоев, для передаточной функции {activation}')
-    plt.xlabel('Число слоев')
-    plt.ylabel('Точность (accuracy)')
-    plt.grid(True)
-    plt.show(block=False)
-    plt.pause(5)
-
-def plot_graph_neurons(accuracy_array, num_neurons, activation):
-    time.sleep(5)    
-    # Создаем новое окно для графика
+def save_graph(array, accuracy_array, activation,learning_rate, array_name, num):
+    filename = f'{array_name}_{activation}_{learning_rate}_{num}.png'
+    time.sleep(1)
+# Создаем новое окно для графика
     plt.figure()
+
+    positions = list(range(len(array)))
+
+
+    # Строим график, используя позиции в качестве абсцисс
+    plt.plot(positions, accuracy_array, marker='o')
+
+    # Устанавливаем метки на оси абсцисс с использованием значений из array
+    plt.xticks(positions, array)
     
-    # Построение графика точности от числа нейронов
-    plt.plot(num_neurons, accuracy_array, marker='o')
-    plt.title(f'Зависимость точности от числа нейронов, для передаточной функции {activation}')
-    plt.xlabel('Число слоев')
+    plt.title(f'Зависимость accuracy от {array_name}, для передаточной функции {activation}')
+    plt.xlabel(array_name)
     plt.ylabel('Точность (accuracy)')
     plt.grid(True)
-    plt.show(block=False)
-    plt.pause(5)
+    plt.savefig(filename) # Сохраняем график в файл
+    plt.close() # Закрываем окно графика

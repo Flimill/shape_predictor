@@ -1,14 +1,24 @@
 import os
 import random
+
+import numpy as np
 from generate_photo import genererate_pictures
 from test_model4 import test_model
 from train_model import train_model
-from plot_graph import plot_graph_layers, plot_graph_neurons
+from plot_graph import save_graph
 
 test_accuracy = 0.0
 models_number = 0
 
+start = 0.8
+stop = 0.99
+step = 0.04
+
+
+momentum_values = np.arange(start, stop + step, step)
 activation_array = ['relu', 'sigmoid', 'tanh', 'softmax','leaky_relu']
+learning_rate_array = [0.01,0.001, 0.0001,0.00001]
+epochs_array = [5, 10,15,20,25,30,35, 40]
 
 #пути к данным
 train_ds_path = 'training_dataset' 
@@ -22,26 +32,28 @@ num_samples_train= 5000#random.randint(4000, 5000)
 num_samples_test=1000
 min_fig_size = 10
 class_names = ['boxes', 'circles', 'treangle'] 
-#genererate_pictures(train_ds_path,num_samples_train,img_width,img_height,min_fig_size)
-#genererate_pictures(test_ds_path, num_samples_test,img_width,img_height,min_fig_size)
+genererate_pictures(train_ds_path,num_samples_train,img_width,img_height,min_fig_size)
+genererate_pictures(test_ds_path, num_samples_test,img_width,img_height,min_fig_size)
         
 #тренировка модели
 num_classes = 3  # всего классов
 epochs = 20#random.randint(17, 25)  # Количество эпох
 batch_size = 64  # Размер мини-выборки
-learning_rate = 0.001#random.choice([0.01,0.001])
-num_layers = models_number
+#learning_rate = 0.001 #random.choice(learning_rate_array)
+activation = 'relu'
+num_layers = 14
 
-for activation in activation_array:
+for learning_rate in learning_rate_array:
     num_layers_array = []
     accuracy_array = []
     num_neurons_array = []
-    
-    for num_layers in range(1,15):
+
+    for momentum in momentum_values:
         models_number+=1
         
         #обучение модели
-        name, num_neurons = train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate, num_layers, activation)
+
+        name, num_neurons = train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate, num_layers, activation,momentum)
         
         #тестирование модели
         test_accuracy3 = test_model(name, class_names, test_ds_path, img_width, img_height)
@@ -69,8 +81,11 @@ for activation in activation_array:
         
         
     #Строим графики
-    plot_graph_layers(num_layers_array, accuracy_array, activation)
-    plot_graph_neurons(accuracy_array, num_neurons_array, activation)
+    #save_graph(num_layers_array, accuracy_array, activation, "layers", models_number)
+    #save_graph(num_neurons_array, accuracy_array, activation, "neurons", models_number)
+    #save_graph(learning_rate_array, accuracy_array, activation, "learning_rate", models_number)
+    #save_graph(epochs_array, accuracy_array, activation,learning_rate, "epochs", models_number)
+    save_graph(momentum_values, accuracy_array, activation,learning_rate, "momentums", models_number)
     
 
 

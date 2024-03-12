@@ -1,15 +1,18 @@
 from os.path import join
 from tensorflow import keras
 from keras.models import Sequential
-from keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense
+from keras.layers import Input, Conv2D, MaxPooling2D, Flatten, Dense, Rescaling
 from os.path import exists
 from os import makedirs
-from tensorflow.keras.optimizers import Adam
+from keras.optimizers import Adam, SGD
 
 
-def train_model(train_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate, num_layers, activation):
-    data_dir = join(train_path) #каталог с данными
+def train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate, num_layers, activation,momentum):
+    data_dir = join(train_ds_path) #каталог с данными
     input_shape = (img_height, img_width, 3)  # размерность картинки
+    #выбираем оптимизатор
+    optimizer = SGD(learning_rate=learning_rate, momentum=momentum)
+    #optimizer=Adam(learning_rate=learning_rate)
     # Инициализируем генератор изображений
     train_ds = keras.utils.image_dataset_from_directory(
         data_dir,
@@ -30,13 +33,15 @@ def train_model(train_path,models_path,num_classes,epochs,batch_size,img_height,
         batch_size=batch_size)
     # Создаем модель
     model = Sequential()
+    model.add(Rescaling(1./255))  # Нормализация
     model.add(Flatten(input_shape=(input_shape)))
-    for _ in range(num_layers):
-        model.add(Dense(32, activation=activation))
-    model.add(Dense(num_classes, activation='softmax'))  # 3 класса: круг, ромб, квадрат
+    for i in range(num_layers):
+        model.add(Dense(128, activation=activation))
+    model.add(Dense(num_classes, activation='softmax')) 
+
 
     # Компилируем модель
-    model.compile(optimizer=Adam(learning_rate=learning_rate), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 
 
     # Обучаем модель
