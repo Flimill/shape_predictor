@@ -10,12 +10,12 @@ from plot_graph import save_graph
 test_accuracy = 0.0
 models_number = 0
 
-start = 0.8
+start = 0.1
 stop = 0.99
-step = 0.04
+step = 0.1
 
 
-momentum_values = np.arange(start, stop + step, step)
+momentum_values = np.arange(start, stop, step)
 activation_array = ['relu', 'sigmoid', 'tanh', 'softmax','leaky_relu']
 learning_rate_array = [0.01,0.001, 0.0001,0.00001]
 epochs_array = [5, 10,15,20,25,30,35, 40]
@@ -53,7 +53,7 @@ for learning_rate in learning_rate_array:
         
         #обучение модели
 
-        name, num_neurons = train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate, num_layers, activation,momentum)
+        name, num_neurons = train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate, num_layers, activation)
         
         #тестирование модели
         test_accuracy3 = test_model(name, class_names, test_ds_path, img_width, img_height)

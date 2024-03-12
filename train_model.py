@@ -7,12 +7,12 @@ from os import makedirs
 from keras.optimizers import Adam, SGD
 
 
-def train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate, num_layers, activation,momentum):
+def train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_height, img_width,models_number,learning_rate, num_layers, activation,momentum=0):
     data_dir = join(train_ds_path) #каталог с данными
     input_shape = (img_height, img_width, 3)  # размерность картинки
     #выбираем оптимизатор
-    optimizer = SGD(learning_rate=learning_rate, momentum=momentum)
-    #optimizer=Adam(learning_rate=learning_rate)
+    #optimizer = SGD(learning_rate=learning_rate, momentum=momentum)
+    optimizer=Adam(learning_rate=learning_rate)
     # Инициализируем генератор изображений
     train_ds = keras.utils.image_dataset_from_directory(
         data_dir,
