@@ -19,18 +19,19 @@ def train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_heig
         validation_split=0.2,
         subset="training",
         seed=123,
-        # shuffle=False,
         image_size=(img_height, img_width),
-        batch_size=batch_size)
+        batch_size=batch_size,
+        label_mode='categorical')
 
     val_ds = keras.utils.image_dataset_from_directory(
         data_dir,
         validation_split=0.2,
         subset="validation",
         seed=123,
-        # shuffle=False,
         image_size=(img_height, img_width),
-        batch_size=batch_size)
+        batch_size=batch_size,
+        label_mode='categorical')
+    
     # Создаем модель
     model = Sequential()
     model.add(Rescaling(1./255))  # Нормализация
@@ -38,10 +39,11 @@ def train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_heig
     for i in range(num_layers):
         model.add(Dense(128, activation=activation))
     model.add(Dense(num_classes, activation='softmax')) 
+    
 
 
     # Компилируем модель
-    model.compile(optimizer=optimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'])
+    model.compile(optimizer=optimizer, loss='categorical_crossentropy', metrics=['accuracy'])
 
 
     # Обучаем модель

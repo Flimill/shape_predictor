@@ -37,18 +37,18 @@ genererate_pictures(test_ds_path, num_samples_test,img_width,img_height,min_fig_
         
 #тренировка модели
 num_classes = 3  # всего классов
-epochs = 20#random.randint(17, 25)  # Количество эпох
+epochs = 5#random.randint(17, 25)  # Количество эпох
 batch_size = 64  # Размер мини-выборки
-#learning_rate = 0.001 #random.choice(learning_rate_array)
-activation = 'relu'
-num_layers = 14
+learning_rate = 0.001 #random.choice(learning_rate_array)
+#activation = 'relu'
+#num_layers = 14
 
-for learning_rate in learning_rate_array:
+for activation in activation_array:
     num_layers_array = []
     accuracy_array = []
     num_neurons_array = []
 
-    for momentum in momentum_values:
+    for num_layers in range(0,15):
         models_number+=1
         
         #обучение модели
@@ -81,11 +81,11 @@ for learning_rate in learning_rate_array:
         
         
     #Строим графики
-    #save_graph(num_layers_array, accuracy_array, activation, "layers", models_number)
-    #save_graph(num_neurons_array, accuracy_array, activation, "neurons", models_number)
+    save_graph(num_layers_array, accuracy_array, activation, "layers", models_number)
+    save_graph(num_neurons_array, accuracy_array, activation, "neurons", models_number)
     #save_graph(learning_rate_array, accuracy_array, activation, "learning_rate", models_number)
     #save_graph(epochs_array, accuracy_array, activation,learning_rate, "epochs", models_number)
-    save_graph(momentum_values, accuracy_array, activation,learning_rate, "momentums", models_number)
+    #save_graph(momentum_values, accuracy_array, activation,learning_rate, "momentums", models_number)
     
 
 

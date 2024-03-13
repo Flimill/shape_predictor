@@ -7,14 +7,14 @@ def save_graph(array, accuracy_array, activation,learning_rate, array_name, num)
 # Создаем новое окно для графика
     plt.figure()
 
-    positions = list(range(len(array)))
+    #positions = list(range(len(array)))
 
 
     # Строим график, используя позиции в качестве абсцисс
-    plt.plot(positions, accuracy_array, marker='o')
+    plt.plot(array, accuracy_array, marker='o')
 
     # Устанавливаем метки на оси абсцисс с использованием значений из array
-    plt.xticks(positions, array)
+    #plt.xticks(positions, array)
     
     plt.title(f'Зависимость accuracy от {array_name}, для передаточной функции {activation}')
     plt.xlabel(array_name)
