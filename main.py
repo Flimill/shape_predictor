@@ -26,8 +26,8 @@ test_ds_path = 'testing_dataset'
 models_path = 'models'  
         
 #генерация новызх картинок
-img_width=64
-img_height=64
+img_width=320
+img_height=320
 num_samples_train= 5000#random.randint(4000, 5000)
 num_samples_test=1000
 min_fig_size = 10
@@ -48,7 +48,7 @@ for activation in activation_array:
     accuracy_array = []
     num_neurons_array = []
 
-    for num_layers in range(1,15):
+    for num_layers in range(14,15):
         models_number+=1
         
         #обучение модели
