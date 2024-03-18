@@ -3,13 +3,13 @@ from keras.models import load_model
 from keras.preprocessing import image
 import numpy as np
 
-from generate_photo import draw_box_random_rotated, draw_circle_random_rotated, draw_triangle_random_rotated, random_color
+from generate_photo import draw_boxes_random_rotated, draw_circles_random_rotated, draw_triangles_random_rotated, random_color
 w=64
 h=64
 min_fig_size = 10
 class_names = ['boxes', 'circles', 'treangle'] 
 # Загружаем модель
-model = load_model('final_models\99.47%/shape_predictor1.h5')
+model = load_model('models/shape_predictor14.h5')
 # Генерируем случайные изображения и делаем предсказания
 num_random_images = 15  # количество случайных изображений для предсказания
 
@@ -26,11 +26,11 @@ def generate_random_image():
     
     # В зависимости от выбранной фигуры, рисуем ее
     if random_shape == 'boxes':
-        image = draw_box_random_rotated(w=w, h=h, fc=random_color(), mfs=min_fig_size)
+        image = draw_boxes_random_rotated(w=w, h=h, fc=random_color(), mfs=min_fig_size, num_shapes=5)
     elif random_shape == 'circles':
-        image = draw_circle_random_rotated(w=w, h=h, fc=random_color(), mfs=min_fig_size)
+        image = draw_circles_random_rotated(w=w, h=h, fc=random_color(), mfs=min_fig_size,num_shapes=5)
     else:
-        image = draw_triangle_random_rotated(w=w, h=h, fc=random_color(), mfs=min_fig_size)
+        image = draw_triangles_random_rotated(w=w, h=h, fc=random_color(), mfs=min_fig_size,num_shapes=5)
     
     return image
 

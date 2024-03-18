@@ -13,7 +13,7 @@ def train_model(train_ds_path,models_path,num_classes,epochs,batch_size,img_heig
     #выбираем оптимизатор
     #optimizer = SGD(learning_rate=learning_rate, momentum=momentum)
     optimizer=Adam(learning_rate=learning_rate)
-    # Инициализируем генератор изображений
+
     train_ds = keras.utils.image_dataset_from_directory(
         data_dir,
         validation_split=0.2,
